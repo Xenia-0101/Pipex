@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/12 22:34:47 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/12 22:36:19 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,24 @@ int main(int argc, char *argv[], char *envp[])
 	}
 	dup2(pfd[0], 1);
 
+	///  *** free and clean ***
+	if (pid > 0)
+	{
+		free(args);
+		i = 0;
+		while(paths[i])
+		{
+			free(paths[i]);
+			i++;
+		}
+		free(paths);
+		i = 0;
+		while(cmd[i])
+		{
+			free(cmd[i]);
+			i++;
+		}
+		free(cmd);
+	}
 	return (0);
 }
