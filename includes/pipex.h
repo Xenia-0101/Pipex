@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/10 21:05:44 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/13 11:25:50 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,20 @@
 # include <fcntl.h>
 
 # include "../libft/include/libft.h"
+
+// structs
+typedef struct s_map
+{
+	/* data */
+	char	**args1;
+	char	**args2;
+	char	**paths;
+	char	*cmd1;
+	char	*cmd2;
+	int		infd;
+	int		outfd;
+}	t_map;
+
+
 
 #endif
