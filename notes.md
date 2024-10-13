@@ -2,6 +2,15 @@
 Pipex
 ===
 
+Do To
+---
+map params:
+	- args1, args2 - arguments for execve
+			- filename, function name, function args, NULL
+	- cmd1, cmd2	- function name
+	- paths - paths to binaries
+	- infile, outfile
+
 Allowed Functions
 ---
 

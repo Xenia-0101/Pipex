@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/14 00:27:01 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 00:36:55 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,112 +14,69 @@
 
 
 // adding some useless comment to test git merge >:o-|-<
-int main(int argc, char *argv[], char *envp[])
+void	ft_pipex(t_map **map, char *argv[], char *envp[])
+{
+
+	// create pipe for the first process
+	if (pipe((*map)->pfd) == -1)
+	{
+		perror("Pipe");
+		exit(1);
+	}
+	// first fork
+	(*map)->pid1 = fork();
+	if((*map)->pid1 == -1)
+	{
+		perror("Fork 1");
+		exit(1);
+	}
+	if(!(*map)->pid1)
+	{
+		// first command
+		ft_process_cmd1(map, argv, envp);
+	}
+
+	// second fork
+	(*map)->pid2 = fork();
+	if((*map)->pid2 == -1)
+	{
+		perror("Fork 2");
+		exit(1);
+	}
+	if(!(*map)->pid2)
+	{
+		printf("child process 2\n\n");
+		ft_process_cmd2(map, argv, envp);
+		exit(0);
+	}
+	// parent
+
+}
+
+int	main(int argc, char *argv[], char *envp[])
 {
 	// take infile (example.txt), perform wc command, write output to terminal
 
-	int i;
-	int args_c; 	// how many args are to be passed to execve
-	char **args;
 	char **cmd;
+	t_map	*map;
 
-	args_c = 2;		// filename and NULL
-
-	// parse command -- argv[2]
-	cmd = ft_split(argv[2], ' ');
-	i = 0;
-	while (cmd[i])
+	if (argc == 5)
 	{
-		args_c++;
-		i++;
+		// init map
+		ft_init_map(&map);
+
+		// parse input arguments
+		ft_parse_files(&map, argc, argv);
+		(*map).paths = ft_split(getenv("PATH"), ':');
+		ft_pipex(&map, argv, envp);
 	}
-	args = ft_calloc(args_c, sizeof (char *));
-	if (!args)
-		exit(1);
-	i = 0;
-	while (i < args_c - 2)
+
+	// *** free and clean ***
+/* 	if ((*map).pid1 > 0 && (*map).pid2)
 	{
-		args[i] = cmd[i];
-		i++;
-	}
-	args[i] = argv[1];		// infile -- argv[1]
-	args[i + 1] = NULL;
-
-	// *** define command path ***
-	char *env_path;
-	char **paths;
-	char *cmd_path;
-
-	env_path = getenv("PATH"); // get path var from env
-	paths = ft_split(env_path, ':');
-
-	/// parsing finished
-
-	/// execute command and continue with the program
-	pid_t pid;
-	int pfd[2];
-	int infd;
-	int outfd;
-
-	infd = open(argv[1], O_RDONLY);
-	outfd = open("outfile.txt", O_CREAT | O_RDWR);
-	pid = fork();
-	if (pid == -1)
-		exit(1);
-	if (pipe(pfd) == -1)
-		exit(1);
-
-	// *** child process ***
-	if (pid == 0)
-	{
-		close(pfd[0]);
-		// dup2 redirects infile to stdin
-		dup2(infd, 0);
-		close(infd);
-
-
-
-		// execute cmd at each path
-		i = 0;
-		while(paths[i])
-		{
-			cmd_path = ft_strjoin_free(ft_strjoin_free(paths[i], "/"), args[0]);
-			execve(cmd_path, args, envp);
-			free(cmd_path);
-			i++;
-		}
-		exit(1);
-	}
-	// *** parent process ***
-	if(pid > 0)
-	{
-		close(pfd[1]);
-		dup2(outfd, 1); // outfile is stdout
-		close(outfd);
-		dup2(pfd[0], 0); // pipe output is stdin
-		close(pfd[0]);
-
-	}
-	dup2(pfd[0], 1);
-
-	///  *** free and clean ***
-	if (pid > 0)
-	{
-		free(args);
-		i = 0;
-		while(paths[i])
-		{
-			free(paths[i]);
-			i++;
-		}
-		free(paths);
-		i = 0;
-		while(cmd[i])
-		{
-			free(cmd[i]);
-			i++;
-		}
-		free(cmd);
-	}
+		// wait(NULL);
+		// wait(NULL);
+		// ft_free_map(&map);
+	} */
 	return (0);
 }
