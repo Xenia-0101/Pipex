@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 11:35:56 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/13 14:49:46 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,48 @@ void	ft_init_map(t_map **map)
 	(*map)->outfd = 0;
 }
 
+
+
+void	ft_free_map(t_map **map)
+{
+	int i;
+	i = 0;
+	while((*map)->args1[i])
+	{
+		free((*map)->args1[i]);
+		i++;
+	}
+	free((*map)->args1);
+	i = 0;
+	while((*map)->paths[i])
+	{
+		free((*map)->paths[i]);
+		i++;
+	}
+	free((*map)->paths);
+	i = 0;
+	free((*map)->cmd1);
+	free(*map);
+}
+
 void	ft_parse_files(t_map **map, char *argv[])
 {
 	// check proper access to infile and outfile
 	if (access(argv[1], F_OK)  | access(argv[1], R_OK))
 	{
+		perror("Infile permissions: ");
 		exit(1);
 		// ToDo: error handling - file does not exist or can't be read
 	}
 	if (!access(argv[4], F_OK) && access(argv[4], W_OK))
 	{
+		perror("Outfile permissions: ");
 		exit(1);
 		// ToDo: error handling - can't write to file
 	}
 	(*map)->infd = open(argv[1], O_RDONLY);
-	(*map)->outfd = open(argv[4], O_CREAT | O_TRUNC | O_RDWR);
+	 // set mode when creating file to 0644 - owner: rw, others: r
+	(*map)->outfd = open(argv[4], O_CREAT | O_TRUNC | O_RDWR, 0644);
 }
 
 void	ft_parse_cmd(t_map **map, char *argv[])
@@ -50,6 +77,7 @@ void	ft_parse_cmd(t_map **map, char *argv[])
 	i = 0;
 	cmd_c = 0;
 	cmd_split = ft_split(argv[2], ' ');
+	(*map)->cmd1 = ft_strdup(cmd_split[0]);
 	while(cmd_split[i])
 	{
 		i++;
@@ -58,17 +86,25 @@ void	ft_parse_cmd(t_map **map, char *argv[])
 	(*map)->args1 = ft_calloc(cmd_c + 2, sizeof (char *));
 	if (!(*map)->args1)
 	{
+		perror("Memory for map.args1 was not allocated. ");
 		exit(1); // ToDo: error handling - calloc fail
 	}
 	i = 0;
 	while(cmd_split[i])
 	{
-		(*map)->args1[i] = cmd_split[i];
+		(*map)->args1[i] = ft_strdup(cmd_split[i]);
 		i++;
 	}
-	(*map)->args1[i] = argv[1];
+	(*map)->args1[i] = ft_strdup(argv[1]);
 	(*map)->args1[i + 1] = NULL;
-	(*map)->cmd1 = cmd_split[0];
+	i = 0;
+	while(cmd_split[i])
+	{
+		free(cmd_split[i]);
+		i++;
+	}
+	free(cmd_split);
+
 }
 
 void	ft_parse_args(t_map **map, char *argv[], char *envp[])
@@ -100,7 +136,10 @@ int	main(int argc, char *argv[], char *envp[])
 
 	pid = fork();
 	if (pid == -1)
+	{
+		perror("Fork Fail: ");
 		exit(1);
+	}
 	if (pipe(pfd) == -1)
 		exit(1);
 
@@ -111,8 +150,6 @@ int	main(int argc, char *argv[], char *envp[])
 		// dup2 redirects infile to stdin
 		dup2(map->infd, 0);
 		close(map->infd);
-
-
 
 		// execute cmd at each path
 		i = 0;
@@ -136,24 +173,11 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	dup2(pfd[0], 1);
 
-	///  *** free and clean ***
-	// if (pid > 0)
-	// {
-	// 	free(args);
-	// 	i = 0;
-	// 	while(paths[i])
-	// 	{
-	// 		free(paths[i]);
-	// 		i++;
-	// 	}
-	// 	free(paths);
-	// 	i = 0;
-	// 	while(cmd[i])
-	// 	{
-	// 		free(cmd[i]);
-	// 		i++;
-	// 	}
-	// 	free(cmd);
-	// }
+	// /  *** free and clean ***
+	if (pid > 0)
+	{
+		wait(NULL);
+		ft_free_map(&map);
+	}
 	return (0);
 }
