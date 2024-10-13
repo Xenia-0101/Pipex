@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 20:28:21 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/13 23:35:32 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,20 @@
 
 # include "../libft/include/libft.h"
 
+# define READ 0
+# define WRITE 1
+
 // structs
 typedef struct s_map
 {
 	int		infd;
+	char	*infd_n;
 	int		outfd;
 	int		pfd[2];
 	char	**paths;
 
 	char	**args; // command + args from command line
+	char	**cmd_a; // args of the command
 	char	*cmd_n; // name of the command
 	char	*cmd_p; // path of the command
 

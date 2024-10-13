@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:35:23 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 22:48:23 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/13 23:18:39 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	ft_parse_files(t_map **map, int argc, char *argv[])
 		// ToDo: error handling - can't write to file
 	}
 	(*map)->infd = open(argv[1], O_RDONLY);
+	(*map)->infd_n = argv[1];
 	 // set mode when creating file to 0644 - owner: rw, others: r
 	(*map)->outfd = open(argv[argc - 1], O_CREAT | O_TRUNC | O_RDWR, 0644);
 	if ((*map)->infd == -1 | (*map)->outfd == -1)

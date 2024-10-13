@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 22:38:11 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/13 23:59:08 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,29 @@ void	ft_pipex(t_map **map, char *argv[], char *envp[])
 	// create pipe for the first process
 	if (pipe((*map)->pfd) == -1)
 	{
+		perror("Pipe");
 		exit(1);
 	}
 	// first fork
 	(*map)->pid1 = fork();
 	if((*map)->pid1 == -1)
 	{
+		perror("Fork 1");
 		exit(1);
 	}
 	if(!(*map)->pid1)
 	{
-		printf("child process 1\n\n");
 		// first command
 		ft_process_cmd1(map, argv, envp);
 	}
+
 	// second fork
 	(*map)->pid2 = fork();
+	if((*map)->pid2 == -1)
+	{
+		perror("Fork 2");
+		exit(1);
+	}
 	if(!(*map)->pid2)
 	{
 		printf("child process 2\n\n");
