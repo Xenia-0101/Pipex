@@ -6,12 +6,14 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/12 22:36:19 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 00:27:01 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex.h"
 
+
+// adding some useless comment to test git merge >:o-|-<
 int main(int argc, char *argv[], char *envp[])
 {
 	// take infile (example.txt), perform wc command, write output to terminal
