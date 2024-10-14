@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:29:11 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 23:19:23 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 10:28:32 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,5 @@ void	ft_init_map(t_map **map)
 	(*map)->cmd_p = NULL;
 	(*map)->pid1 = 0;
 	(*map)->pid2 = 0;
-	(*map)->args1 = NULL;
-	(*map)->args2 = NULL;
-	(*map)->cmd1 = NULL;
-	(*map)->cmd2 = NULL;
 	perror("init map");
 }

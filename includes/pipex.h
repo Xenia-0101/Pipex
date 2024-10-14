@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 23:35:32 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:47:47 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_map
 	char	*cmd_n; // name of the command
 	char	*cmd_p; // path of the command
 
-	int		pid1;
-	int		pid2;
-	char	**args1;
-	char	**args2;
-	char	*cmd1;
-	char	*cmd2;
+	pid_t	pid1;
+	pid_t	pid2;
+
+	int		state1;
+	int		state2;
+
 }	t_map;
 
 // prototypes
@@ -54,6 +54,7 @@ typedef struct s_map
 void	ft_init_map(t_map **map);
 // ft_free.c
 void	ft_free_map(t_map **map);
+void	ft_free_paths(t_map **map);
 // ft_parse.c
 void	ft_parse_args(t_map **map, int argc, char *argv[], char *envp[]);
 void	ft_parse_files(t_map **map, int argc, char *argv[]);
