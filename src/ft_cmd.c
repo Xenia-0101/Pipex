@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 18:13:18 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/13 23:58:37 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 08:59:22 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_get_cmd_a(t_map **map, char *arg)
 	i = 0;
 	while((*map)->args[i])
 	{
+		perror((*map)->args[i]);
 		i++;
 	}
 	(*map)->cmd_a = ft_calloc(i + 1, sizeof (char *));
@@ -27,6 +28,7 @@ void	ft_get_cmd_a(t_map **map, char *arg)
 		(*map)->cmd_a[i] = ft_strdup((*map)->args[i]);
 		i++;
 	}
+	(*map)->cmd_a[i] = (*map)->infd_n;
 	(*map)->cmd_a[i] = NULL;
 }
 
