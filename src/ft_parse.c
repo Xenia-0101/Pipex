@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 15:35:23 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/14 09:28:41 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 12:09:43 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,4 @@ void	ft_parse_files(t_map **map, int argc, char *argv[])
 		perror("Open file ");
 		exit(1);
 	}
-	perror("Parse files");
 }
