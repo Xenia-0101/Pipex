@@ -2,6 +2,15 @@
 Pipex
 ===
 
+Do To
+---
+map params:
+	- args1, args2 - arguments for execve
+			- filename, function name, function args, NULL
+	- cmd1, cmd2	- function name
+	- paths - paths to binaries
+	- infile, outfile
+
 Allowed Functions
 ---
 
@@ -134,6 +143,51 @@ int pipe(int fd[2]);
 
 #### params:
 - **fd[2]:** an array of two filedescriptors, *fd[0]* - read end, *fd[1]* - write end
+
+~~~
+void main(void)
+{
+	// testing pipes
+	int fd[2];
+	int pid;
+	char buff[17];
+
+	// create a pipe - will be inherited by child
+	if (pipe(fd) == -1)
+	{
+		perror("pipe fail");
+		exit(1);
+	}
+
+	// fork the process
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("fork fail");
+		exit(1);
+	}
+
+	// in the child - read from the pipe and write to stdout
+	if (pid == 0)
+	{
+		printf("Child process\n");
+		close(fd[1]);
+		read(fd[0], buff, 17);
+		write(1, buff, 17);
+		close(fd[0]);
+	}
+	// in the parent - use write end of the pipe to send a msg
+	if (pid > 0)
+	{
+		printf("Parent process\n");
+		// close(fd[0]);
+		write(fd[1], "msg from parent\n", 17);
+		// close(fd[1]);
+	}
+	printf("Finished\n");
+	return (0);
+}
+~~~
 
 ---
 

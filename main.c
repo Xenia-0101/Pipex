@@ -6,47 +6,89 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/10 21:38:23 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/14 11:59:08 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex.h"
 
-int main(int argc, char *argv[])
+
+// adding some useless comment to test git merge >:o-|-<
+void	ft_pipex(t_map **map, char *argv[], char *envp[])
+{
+	// create pipe for the first process
+	if (pipe((*map)->pfd) == -1)
+	{
+		perror("Pipe");
+		ft_free_paths(map);
+		exit(1);
+	}
+	// first fork
+	(*map)->pid1 = fork();
+	if((*map)->pid1 == -1)
+	{
+		perror("Fork 1");
+		ft_free_paths(map);
+		exit(1);
+	}
+	if(!(*map)->pid1)
+	{
+		// first command
+		ft_process_cmd1(map, argv, envp);
+	}
+
+	// second fork
+	(*map)->pid2 = fork();
+	if((*map)->pid2 == -1)
+	{
+		perror("Fork 2");
+		exit(1);
+	}
+	if(!(*map)->pid2)
+	{
+		ft_process_cmd2(map, argv, envp);
+		exit(0);
+	}
+	// parent
+	if((*map)->pid1 > 0 && (*map)->pid2 > 0)
+	{
+		close((*map)->pfd[READ]);
+		close((*map)->pfd[WRITE]);
+		waitpid((*map)->pid1, &(*map)->state1, 0);
+		waitpid((*map)->pid2, &(*map)->state2, 0);
+	}
+
+}
+
+int	main(int argc, char *argv[], char *envp[])
 {
 	// take infile (example.txt), perform wc command, write output to terminal
 
-	int i;
-	int args_c; 	// how many args are to be passed to execve
-	char **args;
-	char **cmd;
-	char *cmd_path;
+	t_map	*map;
 
-	args_c = 2;		// filename and NULL
-
-	// parse command -- argv[2]
-	cmd = ft_split(argv[2], ' ');
-	i = 0;
-	while (cmd[i])
+	if (argc == 5)
 	{
-		args_c++;
-		i++;
+		// init map
+		ft_init_map(&map);
+
+		// parse input arguments
+		ft_parse_files(&map, argc, argv);
+		(*map).paths = ft_split(getenv("PATH"), ':');
+		ft_pipex(&map, argv, envp);
+
+		ft_free_paths(&map);
+
+		close((*map).infd);
+		close((*map).outfd);
+		free(map);
 	}
-	args = ft_calloc(args_c, sizeof (char *));
-	if (!args)
-		exit(1);
-	i = 0;
-	while (i < args_c - 2)
+
+	// *** free and clean ***
+/* 	if ((*map).pid1 > 0 && (*map).pid2)
 	{
-		args[i] = cmd[i];
-		i++;
-	}
-	args[i] = argv[1];		// infile -- argv[1]
-	args[i + 1] = NULL;
-
-	// define command path
-	cmd_path = ft_strjoin("/bin/", args[0]);
-	execve(cmd_path, args, NULL);
-
+		// wait(NULL);
+		// wait(NULL);
+		// ft_free_map(&map);
+	} */
 	return (0);
 }

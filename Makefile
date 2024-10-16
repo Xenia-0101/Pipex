@@ -1,6 +1,6 @@
 NAME = pipex
-CFLAGS = -g
-# CFLAGS = -Wall -Wextra -Werror -g
+# CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 RM = rm -rf
 CC = cc
@@ -15,6 +15,10 @@ LIBFT_NAME = libft.a
 # *** source code files *** #
 SRC := \
 		main.c \
+		${SRCS}ft_free.c \
+		${SRCS}ft_init.c \
+		${SRCS}ft_parse.c \
+		${SRCS}ft_cmd.c \
 
 OBJ = $(SRC:.c=.o)
 HEADER = -I ./include/
@@ -26,7 +30,7 @@ all: libft ${NAME}
 	@${CC} ${CFLAGS} -c $< $(HEADER) -o $@
 
 ${NAME}: ${OBJ}
-	${CC} -o ${NAME} ${OBJ} libft.a 
+	${CC} -o ${NAME} ${OBJ} libft.a
 
 # *** compile libft *** #
 libft:
