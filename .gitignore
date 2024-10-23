@@ -4,4 +4,5 @@ libft.a
 *.o
 example.txt
 outfile.txt
-
+infile
+outfile
