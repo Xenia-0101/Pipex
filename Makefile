@@ -13,7 +13,7 @@ LIBFT_DIR = libft
 LIBFT_NAME = libft.a
 
 # *** source code files *** #
-SRC := \
+SRC = \
 		main.c \
 		${SRCS}ft_free.c \
 		${SRCS}ft_init.c \
@@ -44,7 +44,7 @@ clean:
 	make clean -C ${LIBFT_DIR}
 
 fclean: clean
-	${RM} ${NAME} ${LIBFT_NAME}
+	${RM} ${NAME}
 
 re: fclean all
 
