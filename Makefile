@@ -6,34 +6,44 @@ RM = rm -rf
 CC = cc
 AR = ar rc
 
-SRCS = src/
+HEADER = -I ./include/
 
 # *** libft library *** #
 LIBFT_DIR = libft
 LIBFT_NAME = libft.a
 
 # *** source code files *** #
+SRC_PATH = src/
+MAIN = main.c
 SRC = \
-		main.c \
-		${SRCS}ft_init_map.c \
-		${SRCS}ft_open_files.c \
-		${SRCS}ft_utils.c \
-		${SRCS}ft_exec_cmd.c \
-		${SRCS}ft_get_paths.c \
-		${SRCS}ft_free.c \
-		# ${SRCS}ft_cmd.c \
+		ft_init_map.c \
+		ft_open_files.c \
+		ft_utils.c \
+		ft_exec_cmd.c \
+		ft_get_paths.c \
+		ft_free.c 
+SRCS = ${MAIN} $(addprefix $(SRC_PATH), $(SRC))
 
-OBJ = $(SRC:.c=.o)
-HEADER = -I ./include/
+# *** object files *** #
+OBJ_PATH = obj/
+OBJ = $(SRC:.c=.o) $(MAIN:.c=.o)
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: libft ${NAME}
 	@echo "pipex executable is ready"
 
-%.o: %.c
+${OBJ_PATH}%.o: ${SRC_PATH}%.c
 	@${CC} ${CFLAGS} -c $< $(HEADER) -o $@
+	@echo "working on objects"
 
-${NAME}: ${OBJ}
-	${CC} -o ${NAME} ${OBJ} libft.a
+${OBJS}: ${OBJ_PATH}
+
+${OBJ_PATH}:
+	@mkdir ${OBJ_PATH}
+	@echo "creating obj path"
+
+${NAME}: ${OBJS}
+	${CC} -o ${NAME} ${OBJS} libft.a
 
 # *** compile libft *** #
 libft:
