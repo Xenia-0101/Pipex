@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 12:16:56 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 13:16:52 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ void	ft_clean_exit(t_map *map, int status)
 {
 	ft_free(map);
 	exit(status);
-}
-
-void	ft_pipex(t_map *map,int argc, char *argv[])
-{
-
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -41,7 +36,7 @@ int	main(int argc, char *argv[], char *envp[])
 	if (ft_get_paths(&map, envp))
 		ft_clean_exit(&map, 1);
 	// redirect infile to stdin
-	// dup2(map.in_fd, STDIN_FILENO);
+	dup2(map.in_fd, STDIN_FILENO);
 	i = 2;
 	// execute commands
 	while (i < argc - 2)
@@ -51,5 +46,4 @@ int	main(int argc, char *argv[], char *envp[])
 		i++;
 	}
 	ft_clean_exit(&map, 0);
-	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 12:04:29 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 12:57:53 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ typedef struct s_map
 	// 0 - nothing to free,
 	// 1 - free map,
 	// 2 - free paths,
+	// 3 - free full path
 
 	int		in_fd;
 	int		out_fd;
 	char	**paths;
 	char	*full_path;
-	char	*cmd_name;
+	char	**cmd_args;
 }	t_map;
 
 // prototypes
