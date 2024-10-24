@@ -6,11 +6,11 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 08:04:21 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 10:01:49 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "../includes/pipex.h"
 
 void	ft_clean_exit(t_map *map, int status)
 {
@@ -41,15 +41,14 @@ int	main(int argc, char *argv[], char *envp[])
 	if (ft_get_paths(&map, envp))
 		ft_clean_exit(&map, 1);
 	// redirect infile to stdin
-	dup2(map.in_fd, STDIN_FILENO);
+	// dup2(map.in_fd, STDIN_FILENO);
 	i = 2;
 	// execute commands
-	while (i < argc - 1)
+	while (i < argc - 2)
 	{
-		// ft_exec_cmd(&map, argv[i], envp);
+		printf("%d/%d:\t%s\n\n", i - 1, argc - 3, argv[i]);
+		ft_exec_cmd(&map, argv[i], envp);
 		i++;
 	}
-
-
 	return (0);
 }

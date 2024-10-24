@@ -14,19 +14,20 @@ LIBFT_NAME = libft.a
 
 # *** source code files *** #
 SRC_PATH = src/
-MAIN = main.c
 SRC = \
+		main.c \
 		ft_init_map.c \
 		ft_open_files.c \
 		ft_utils.c \
 		ft_exec_cmd.c \
 		ft_get_paths.c \
-		ft_free.c 
-SRCS = ${MAIN} $(addprefix $(SRC_PATH), $(SRC))
+		ft_free.c \
+		ft_get_full_path.c
+SRCS := $(addprefix $(SRC_PATH), $(SRC))
 
 # *** object files *** #
 OBJ_PATH = obj/
-OBJ = $(SRC:.c=.o) $(MAIN:.c=.o)
+OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
 
 all: libft ${NAME}
