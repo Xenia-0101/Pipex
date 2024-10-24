@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:31:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 13:14:59 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 13:30:14 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	ft_exec_cmd(t_map *map, char *cmd, char *env[])
 	// child -> process cmd
 	//		 -> loop paths and execute
 	// parent -> redirect to stdin
-	printf("cmd: %s\n", cmd);
 	// get cmd path and check access
 	if (ft_get_full_path(map, cmd))
 	{
@@ -48,9 +47,12 @@ int	ft_exec_cmd(t_map *map, char *cmd, char *env[])
 		close(pfd[0]);
 		// -- redirect writing end to stdout
 		dup2(pfd[1], STDOUT_FILENO);
-		close(pfd[1]);
+		// close(pfd[1]);
 		// execute cmd
-		execve(map->full_path, map->cmd_args, env);
+		if (execve(map->full_path, map->cmd_args, env) == -1)
+		{
+			perror("Execve failed");
+		};
 		// free(map->full_path);
 		// write(2, "child hello\n", 12);
 	}
@@ -62,7 +64,7 @@ int	ft_exec_cmd(t_map *map, char *cmd, char *env[])
 		close(pfd[1]);
 		// -- redirect reading end to stdin
 		dup2(pfd[0], STDIN_FILENO);
-		close(pfd[0]);
+		// close(pfd[0]);
 		// exit
 		free(map->full_path);
 		ft_free_arr(map->cmd_args);
