@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:15:56 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 12:32:08 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 12:38:30 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	ft_get_full_path(t_map *map, char *cmd)
 		free(path);
 		if (!access(map->full_path, F_OK) & !access(map->full_path, X_OK))
 		{
-			printf("%s\n", map->full_path);
 			ft_free_arr(cmd_split);
 			return (0);
 		}
