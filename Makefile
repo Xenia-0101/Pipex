@@ -19,7 +19,8 @@ SRC = \
 		${SRCS}ft_open_files.c \
 		${SRCS}ft_utils.c \
 		${SRCS}ft_exec_cmd.c \
-		# ${SRCS}ft_parse.c \
+		${SRCS}ft_get_paths.c \
+		${SRCS}ft_free.c \
 		# ${SRCS}ft_cmd.c \
 
 OBJ = $(SRC:.c=.o)
