@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 10:01:49 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/24 12:16:56 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_exec_cmd(&map, argv[i], envp);
 		i++;
 	}
-	return (0);
+	ft_clean_exit(&map, 0);
+	return (1);
 }
