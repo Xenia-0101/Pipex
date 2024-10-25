@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/23 14:45:07 by xenia            ###   ########.fr       */
+/*   Created: 2024/10/24 07:41:08 by xenia             #+#    #+#             */
+/*   Updated: 2024/10/25 11:57:58 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/pipex.h"
+#include "../includes/pipex.h"
 
-void	ft_pipex(t_map *map,int argc, char *argv[])
+void	ft_free_arr(char **arr)
 {
+	int	i;
 
-}
-
-int	main(int argc, char *argv[], char *envp[])
-{
-
-	return (0);
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
 }

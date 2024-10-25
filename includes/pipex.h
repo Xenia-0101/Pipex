@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/23 16:32:53 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:55:49 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,16 @@
 # include <string.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-
 # include "../libft/include/libft.h"
 
 // structs
 typedef struct s_map
 {
-	int		state;
-	// 0 - nothing to free,
-	// 1 - free map,
-	// 2 - free paths,
-
 	int		in_fd;
 	int		out_fd;
 	char	**paths;
-
+	char	*full_path;
+	char	**cmd_args;
 }	t_map;
 
 // prototypes
@@ -46,6 +41,11 @@ int		ft_open_files(t_map *map, char *f1, char *f2);
 void	ft_put_error(char *error);
 // ** ft_exec_cmd.c
 void	ft_exec_cmd(t_map *map, char *cmd, char *env[]);
-
+// ** ft_get_paths.c
+int		ft_get_paths(t_map *map, char *env[]);
+// ** ft_free.c
+void	ft_free_arr(char **arr);
+// ** ft_get_full_path.c
+int		ft_get_full_path(t_map *map, char *cmd);
 
 #endif
