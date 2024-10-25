@@ -6,13 +6,13 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:37:49 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 11:57:34 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 12:01:23 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	ft_get_paths(t_map *map, char *env[])
+void	ft_get_paths(t_map *map, char *env[])
 {
 	char	*path;
 
@@ -29,12 +29,12 @@ int	ft_get_paths(t_map *map, char *env[])
 	{
 		map->paths = ft_split(path, ':');
 		free(path);
-		return (0);
+		return ;
 	}
 	else
 	{
 		ft_put_error("PATH not found");
 		free(path);
-		return (1);
+		exit (1);
 	}
 }
