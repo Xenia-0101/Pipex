@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 23:22:06 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 23:36:49 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	ft_open_files(t_map *map, char *f1, char *f2)
 	if (map->in_fd == -1)
 	{
 		perror(f1);
-		exit(1);
+		map->in_fd = open("/dev/null", O_RDONLY);
+		// exit(1);
 	}
 	if (map->out_fd == -1)
 	{
