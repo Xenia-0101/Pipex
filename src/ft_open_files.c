@@ -6,14 +6,15 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/23 16:27:09 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:56:12 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
 /**
- * @brief	Check if infile and outfile are accessble and open them. Exit on failure.
+ * @brief	Check if infile and outfile are accessble and open them.
+ * 			Exit on failure.
  *	Check file access:
  *	infile - exists and can be read
  *	outfile - does not exist or exists and can be written into
@@ -36,21 +37,14 @@ int	ft_open_files(t_map *map, char *f1, char *f2)
 	if (!access(f2, F_OK) && access(f2, W_OK))
 	{
 		ft_put_error("Check outfile permissions.");
-		// ToDo: free map
 		return (1);
 	}
 	map->in_fd = open(f1, O_RDONLY, 0644);
 	map->out_fd = open(f2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (map->in_fd == -1 | map->out_fd == -1)
+	if ((map->in_fd == -1) | (map->out_fd == -1))
 	{
 		ft_put_error("Infile or outfile could not be opened.");
 		return (1);
 	}
 	return (0);
-}
-
-int ft_open_paths(t_map *map)
-{
-	map->paths = ft_split(getenv("PATH"), ':');
-
 }

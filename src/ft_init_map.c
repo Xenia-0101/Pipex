@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:37:30 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 12:24:15 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:19:17 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,4 @@ void	ft_init_map(t_map *map)
 	map->paths = NULL;
 	map->full_path = NULL;
 	map->state = 0;
-
 }

@@ -1,6 +1,6 @@
 NAME = pipex
-CFLAGS = -g
-# CFLAGS = -Wall -Wextra -Werror -g
+# CFLAGS = -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 RM = rm -rf
 CC = cc
@@ -35,13 +35,11 @@ all: libft ${NAME}
 
 ${OBJ_PATH}%.o: ${SRC_PATH}%.c
 	@${CC} ${CFLAGS} -c $< $(HEADER) -o $@
-	@echo "working on objects"
 
 ${OBJS}: ${OBJ_PATH}
 
 ${OBJ_PATH}:
 	@mkdir ${OBJ_PATH}
-	@echo "creating obj path"
 
 ${NAME}: ${OBJS}
 	${CC} -o ${NAME} ${OBJS} libft.a

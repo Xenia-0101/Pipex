@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:37:49 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/24 08:05:20 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:57:34 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 int	ft_get_paths(t_map *map, char *env[])
 {
-	int i = 0;
-	char *path;
+	char	*path;
 
 	path = NULL;
 	while (*env)
 	{
 		if (!ft_strncmp("PATH=", *env, 5))
 		{
-			path = ft_substr(*env, 5, sizeof (*path) - 5 );
+			path = ft_substr(*env, 5, sizeof (*path) - 5);
 		}
 		env++;
 	}
@@ -30,7 +29,6 @@ int	ft_get_paths(t_map *map, char *env[])
 	{
 		map->paths = ft_split(path, ':');
 		free(path);
-		map->state = 2;
 		return (0);
 	}
 	else
