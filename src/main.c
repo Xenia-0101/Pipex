@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 11:55:10 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 12:01:46 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,7 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_put_error("Files could not be opened");
 		exit(1);
 	}
-	if (ft_get_paths(&map, envp))
-	{
-		ft_put_error("PATH error");
-		exit(1);
-	}
+	ft_get_paths(&map, envp);
 	dup2(map.in_fd, STDIN_FILENO);
 	close(map.in_fd);
 	i = 2;

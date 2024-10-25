@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 11:55:49 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 12:01:34 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_put_error(char *error);
 // ** ft_exec_cmd.c
 void	ft_exec_cmd(t_map *map, char *cmd, char *env[]);
 // ** ft_get_paths.c
-int		ft_get_paths(t_map *map, char *env[]);
+void	ft_get_paths(t_map *map, char *env[]);
 // ** ft_free.c
 void	ft_free_arr(char **arr);
 // ** ft_get_full_path.c
