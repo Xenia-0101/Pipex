@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 23:23:06 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 23:59:25 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	ft_init_map(t_map *map);
 void	ft_open_files(t_map *map, char *f1, char *f2);
 // ** ft_utils.c
 void	ft_put_error(char *error);
+void	ft_put_error_2(char *error, char *val);
 // ** ft_exec_cmd.c
 void	ft_exec_cmd(t_map *map, char *cmd, char *env[]);
 // ** ft_get_paths.c
