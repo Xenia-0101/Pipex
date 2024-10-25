@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 11:03:10 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 11:07:30 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,18 +91,19 @@ int	main(int argc, char *argv[], char *envp[])
 	// redirect infile to stdin
 	dup2(map.in_fd, STDIN_FILENO);
 	close(map.in_fd);
-/* 	i = 2;
+	i = 2;
 	// execute commands
 	while (i < argc - 2)
 	{
-		ft_exec_cmd(&map, argv[i], envp);
+		// ft_exec_cmd(&map, argv[i], envp);
+		ft_pipex(&map, argv[i], envp);
 		i++;
-	} */
+	}
 	// execute one command
-	ft_pipex(&map, argv[2], envp);
+	// ft_pipex(&map, argv[2], envp);
 	dup2(map.out_fd, STDOUT_FILENO);
 	// close(map.out_fd);
-	ft_exec_cmd(&map, argv[3], envp);
+	ft_exec_cmd(&map, argv[i], envp);
 	// // ft_get_full_path(&map, argv[i]);
 	// ft_get_full_path(&map, argv[3]);
 	// execve(map.full_path, map.cmd_args, envp);
