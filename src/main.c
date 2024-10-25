@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 22:39:30 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 22:43:48 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	main(int argc, char *argv[], char *envp[])
 	i = 2;
 	while (i < argc - 2)
 	{
-		ft_pipex(&map, argv[i], envp);
-		i++;
+		ft_pipex(&map, argv[i++], envp);
 	}
 	dup2(map.out_fd, STDOUT_FILENO);
 	ft_exec_cmd(&map, argv[i], envp);
