@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 12:01:46 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/25 12:27:21 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_pipex(t_map *map, char *cmd, char *env[])
 	{
 		close(pfd[1]);
 		dup2(pfd[0], STDIN_FILENO);
+		wait(NULL);
 	}
 }
 
