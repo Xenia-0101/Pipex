@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:23:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 12:01:34 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/26 22:31:25 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ typedef struct s_map
 // ** ft_init_map.c
 void	ft_init_map(t_map *map);
 // ** ft_open_files.c
-int		ft_open_files(t_map *map, char *f1, char *f2);
+void	ft_open_files(t_map *map, char *f1, char *f2);
 // ** ft_utils.c
 void	ft_put_error(char *error);
+void	ft_put_error_2(char *error, char *val);
+int		ft_arrlen(char **arr);
 // ** ft_exec_cmd.c
 void	ft_exec_cmd(t_map *map, char *cmd, char *env[]);
 // ** ft_get_paths.c
