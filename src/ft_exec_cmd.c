@@ -6,12 +6,23 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:31:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/26 00:05:47 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/28 16:47:02 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+/**
+ * @brief Get executable file path and execute command with proper arguments.
+ *
+ * Call ft_get_full_path
+ * 	on failure - free memory set proper error msg and exit.
+ * 	if successfull - map.full_path is set and the command is executed.
+ *
+ * @param map	Project data struct
+ * @param cmd	Command to be executed
+ * @param env	Environment variables
+ */
 void	ft_exec_cmd(t_map *map, char *cmd, char *env[])
 {
 	if (ft_get_full_path(map, cmd))
