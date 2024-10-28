@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 08:40:44 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/28 11:18:10 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ int	ft_open_files(t_map *map, char *f1, char *f2)
 		map->in_fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		ft_read_here_doc(map);
 		map->in_fd = open("here_doc", O_RDONLY, 0666);
-		map->out_fd = open(f2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (access(f2, F_OK))
+			open(f2, O_CREAT, 0666);
+		map->out_fd = open(f2, O_RDWR | O_APPEND, 0666);
 		ft_check_fd(map, f1, f2);
 		return (3);
 	}
@@ -65,6 +67,7 @@ int	ft_open_files(t_map *map, char *f1, char *f2)
 		map->in_fd = open(f1, O_RDONLY, 0666);
 		map->out_fd = open(f2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		ft_check_fd(map, f1, f2);
+		write(map->out_fd, "", 0);
 	}
 	return (2);
 }
