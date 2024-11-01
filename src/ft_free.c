@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_cmd.c                                      :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 16:31:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/26 00:05:47 by xenia            ###   ########.fr       */
+/*   Created: 2024/10/24 07:41:08 by xenia             #+#    #+#             */
+/*   Updated: 2024/10/25 11:57:58 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	ft_exec_cmd(t_map *map, char *cmd, char *env[])
+void	ft_free_arr(char **arr)
 {
-	if (ft_get_full_path(map, cmd))
+	int	i;
+
+	i = 0;
+	while (arr[i])
 	{
-		ft_free_arr(map->paths);
-		ft_put_error_2("command not found", cmd);
-		exit (127);
+		free(arr[i]);
+		i++;
 	}
-	if (execve(map->full_path, map->cmd_args, env) == -1)
-	{
-		perror("Execve failed");
-		exit(127);
-	}
+	free(arr);
 }

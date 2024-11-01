@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:09:53 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 15:51:24 by xenia            ###   ########.fr       */
+/*   Updated: 2024/10/26 22:39:16 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,4 @@ int	ft_arrlen(char **arr)
 		}
 	}
 	return (i);
-}
-
-void	ft_free_arr(char **arr)
-{
-	int	i;
-
-	i = 0;
-	while (arr[i])
-	{
-		free(arr[i]);
-		i++;
-	}
-	free(arr);
 }
