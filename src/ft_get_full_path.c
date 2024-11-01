@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 09:15:56 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 16:41:46 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 21:25:06 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 /**
  * @brief Free memory and possibly exit, based on option.
+ * >)
  */
 void	ft_free_exit(t_map *map, int option)
 {
