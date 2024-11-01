@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 11:18:10 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 21:27:56 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_check_fd(t_map *map, char *f1, char *f2)
 
 void	ft_read_here_doc(t_map *map)
 {
-	char *input;
+	char	*input;
 
 	input = get_next_line(STDIN_FILENO);
 	while (strncmp(input, map->argv[2], ft_strlen_gnl(map->argv[2])))
