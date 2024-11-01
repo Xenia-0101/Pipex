@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:31:14 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 16:47:02 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 20:41:51 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_exec_cmd(t_map *map, char *cmd, char *env[])
 	if (ft_get_full_path(map, cmd))
 	{
 		ft_free_arr(map->paths);
-		ft_put_error_2("command not found", cmd);
+		perror("command not found");
 		exit (127);
 	}
 	if (execve(map->full_path, map->cmd_args, env) == -1)
