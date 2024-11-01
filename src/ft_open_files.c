@@ -6,12 +6,26 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 11:18:10 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 20:18:39 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
+int		ft_open_files(t_map *map, char *f1, char *f2);
+void	ft_read_here_doc(t_map *map);
+void	ft_check_fd(t_map *map, char *f1, char *f2);
+
+/**
+ * @brief	Check if files were opened sucessfully and handle errors.
+ *
+ * If in_fd == -1, set appropriate error and open an empty file.
+ * If out_fd == -1, set appropriate error and exit program.
+ *
+ * @param map	Map data struct
+ * @param f1	Infile name
+ * @param f2	Outfile name
+ */
 void	ft_check_fd(t_map *map, char *f1, char *f2)
 {
 	if (map->in_fd == -1)
@@ -26,27 +40,51 @@ void	ft_check_fd(t_map *map, char *f1, char *f2)
 	}
 }
 
+/**
+ * @brief	Read standard input and write contents to here_doc.
+ *
+ * Read from standard input using get_next_line, save the contents in row var.
+ * While row is not equal to the limiter, write row into here_doc (in_fd),
+ * free row and read another line.
+ * If limiter is read from stdin, free row and return from the function
+ *
+ * @param	map	Map data struct.
+ */
 void	ft_read_here_doc(t_map *map)
 {
-	char *input;
+	char	*row;
 
-	input = get_next_line(STDIN_FILENO);
-	while (strncmp(input, map->argv[2], ft_strlen_gnl(map->argv[2])))
+	row = get_next_line(STDIN_FILENO);
+	while (strncmp(row, map->argv[2], ft_strlen_gnl(map->argv[2])))
 	{
-		write(map->in_fd, input, ft_strlen_gnl(input));
-		free(input);
-		input = get_next_line(STDIN_FILENO);
+		write(map->in_fd, row, ft_strlen_gnl(row));
+		free(row);
+		row = get_next_line(STDIN_FILENO);
 	}
-	free(input);
+	free(row);
 }
 
 /**
- * @brief	Open infile and outfile.
- * 			Exit on failure.
+ * @brief	Handle opening of infile and outfile with proper permissions.
+ *
+ * If name of the infile is here_doc and the number of arguments is larger
+ * than 5:
+ * 		create here_doc, open it for writing and call ft_read_here_doc
+ * 		(read stdin into here_doc).
+ * 		Open here_doc for reading.
+ * 		If Outfile does not exist, create it.
+ * 		Open outfile for reading and writing, O_APPEND flag means the content
+ * 		will be appended instead of rewriting the file.
+ * 		Call ft_check_fd function to handle possible errors.
+ * Else:
+ * 		open infile for reading, and outfile for writing.
+ * 		Call ft_check_fd function to handle possible errors.
  *
  * @param	map	Project data struct
- * @param	f1	Infile
- * @param	f2	Outfile
+ * @param	f1	Infile name
+ * @param	f2	Outfile name
+ *
+ * @return int	The index of the first command line argument.
  */
 int	ft_open_files(t_map *map, char *f1, char *f2)
 {
@@ -67,7 +105,6 @@ int	ft_open_files(t_map *map, char *f1, char *f2)
 		map->in_fd = open(f1, O_RDONLY, 0666);
 		map->out_fd = open(f2, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		ft_check_fd(map, f1, f2);
-		write(map->out_fd, "", 0);
 	}
 	return (2);
 }
