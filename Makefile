@@ -16,13 +16,13 @@ LIBFT_NAME = libft.a
 SRC_PATH = src/
 SRC = \
 		main.c \
-		ft_init_map.c \
 		ft_open_files.c \
 		ft_utils.c \
 		ft_exec_cmd.c \
 		ft_get_paths.c \
 		ft_free.c \
 		ft_get_full_path.c
+
 SRCS := $(addprefix $(SRC_PATH), $(SRC))
 
 # *** object files *** #

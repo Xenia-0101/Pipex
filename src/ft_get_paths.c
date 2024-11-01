@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 16:37:49 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/25 12:01:23 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 20:42:21 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_get_paths(t_map *map, char *env[])
 	}
 	else
 	{
-		ft_put_error("PATH not found");
+		perror("PATH not found");
 		free(path);
 		exit (1);
 	}

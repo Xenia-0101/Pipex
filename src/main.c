@@ -6,7 +6,7 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:29:41 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/27 22:56:12 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 20:43:26 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	ft_pipex(t_map *map, char *cmd, char *env[])
 
 	if (pipe(pfd) == -1)
 	{
-		ft_put_error("Pipe failed");
+		perror("Pipe failed");
 		return ;
 	}
 	pid = fork();
 	if (pid == -1)
 	{
-		ft_put_error("Fork failed");
+		perror("Fork failed");
 		return ;
 	}
 	if (pid == 0)
@@ -48,7 +48,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	if (argc < 5)
 	{
-		ft_put_error("Incorrect number of arguments");
+		perror("Incorrect number of arguments");
 		exit(1);
 	}
 	ft_init_map(&map, argc, argv);
