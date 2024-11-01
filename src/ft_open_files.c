@@ -6,11 +6,12 @@
 /*   By: xenia <xenia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 15:42:44 by xenia             #+#    #+#             */
-/*   Updated: 2024/10/28 16:23:58 by xenia            ###   ########.fr       */
+/*   Updated: 2024/11/01 20:18:39 by xenia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
+
 int		ft_open_files(t_map *map, char *f1, char *f2);
 void	ft_read_here_doc(t_map *map);
 void	ft_check_fd(t_map *map, char *f1, char *f2);
