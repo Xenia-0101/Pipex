@@ -20,6 +20,7 @@ SRC = \
 		ft_utils.c \
 		ft_exec_cmd.c \
 		ft_get_paths.c \
+		ft_free.c \
 		ft_get_full_path.c
 
 SRCS := $(addprefix $(SRC_PATH), $(SRC))
